@@ -16,7 +16,9 @@
     },
     "minimum-stability": "dev",
     "require": {
+        "laravel/framework": "~5.3.0",
         "guzzlehttp/guzzle": "^6.3",
+        "dittertp/gibberish-aes-php": "^1.1",
         "vlucas/phpdotenv": "^2.4"
     }
 }

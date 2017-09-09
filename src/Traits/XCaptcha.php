@@ -1,13 +1,14 @@
 <?php
 namespace Xiaohuilam\XCaptcha\Traits;
 
-trait XCaptcha{
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
+use Response;
+use Image;
+use DB;
 
-    use Illuminate\Http\Request;
-    use Illuminate\Support\Facades\Redis;
-    use Response;
-    use Image;
-    use DB;
+
+trait XCaptcha{
 
     protected $g;
 
@@ -232,7 +233,7 @@ trait XCaptcha{
         # POW算题
 
         $ip = $request->ip();
-        $id = $request->session()->getId();
+        $id = $request->fingerprint();
 
         $appkey = $request->get('k', null);
 
@@ -292,7 +293,7 @@ trait XCaptcha{
             }, 600);
 
             $ip = $request->ip();
-            $id = $request->session()->getId();
+            $id = $request->fingerprint();
 
             $q1 = Redis::get('RATE:IP:'.$ip);
             $q2 = Redis::get('RATE:ID:'.$id);
